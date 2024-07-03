@@ -4,8 +4,8 @@
   "description": "goit-js-hw-08",
   "homepage": "https://cristianf09.github.io/goit-js-hw-08",
   "scripts": {
-    "start": "parcel ./01-gallery.html",
-    "build": "parcel build ./01-gallery.html"
+    "start": "parcel src/*.html",
+    "build": "parcel build src/*.html --public-url /goit-js-hw-08/"
   },
   "repository": {
     "type": "git",
