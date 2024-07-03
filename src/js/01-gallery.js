@@ -20,7 +20,6 @@ function renderGalleryItems() {
 
         link.appendChild(image);
         galleryItem.appendChild(link);
-
         gallery.appendChild(galleryItem);
     });
 
