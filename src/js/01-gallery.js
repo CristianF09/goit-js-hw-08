@@ -1,6 +1,9 @@
 import { galleryItems } from './gallery-items.js';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import Player from '@vimeo/player';
+
+const LOCAL_STORAGE_KEY = 'videoplayer-current-time';
 
 function renderGalleryItems() {
     const gallery = document.querySelector('.gallery');
@@ -20,6 +23,7 @@ function renderGalleryItems() {
 
         link.appendChild(image);
         galleryItem.appendChild(link);
+
         gallery.appendChild(galleryItem);
     });
 
@@ -32,4 +36,18 @@ function renderGalleryItems() {
     lightbox.refresh();
 }
 
-document.addEventListener('DOMContentLoaded', renderGalleryItems);
+document.addEventListener('DOMContentLoaded', () => {
+    renderGalleryItems();
+
+    const savedTime = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (savedTime) {
+        const iframe = document.querySelector('#vimeo-player');
+        const player = new Player(iframe);
+
+        player.ready().then(() => {
+            player.setCurrentTime(parseFloat(savedTime)).catch(error => {
+                console.error('Error setting saved time:', error);
+            });
+        });
+    }
+});
